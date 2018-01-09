@@ -158,17 +158,35 @@ public class LayerMaskWriter implements WriterFace {
             byte[] filler = {(byte) 0};
             bytesList.add(filler);
 
-            //ExtraDataSize 没mask 4字节 没混合 4字节 3.0没有Adjustment layer infos
+            //ExtraDataSize 
+            
+            //没mask
             ByteBuffer ExtraDataSize = ByteBuffer.allocate(4);
             byte[] Layermask = new byte[4];
 
-            //不需要混合 长度 Composite gray blend source + Composite gray blend destination range
-            ByteBuffer LayerblendingRangeBuffer = ByteBuffer.allocate(12);
-            LayerblendingRangeBuffer.putInt(8);
-            LayerblendingRangeBuffer.putShort((short) 0);
-            LayerblendingRangeBuffer.putShort((short) 0);
-            LayerblendingRangeBuffer.putShort((short) 0);
-            LayerblendingRangeBuffer.putShort((short) 0);
+            ByteBuffer LayerblendingRangeBuffer = ByteBuffer.allocate(44);
+            // length of layer blending ranges data
+            LayerblendingRangeBuffer.putInt(40);
+            // gray src range
+            LayerblendingRangeBuffer.putInt(0x0000ffff);
+            // gray dst range
+            LayerblendingRangeBuffer.putInt(0x0000ffff);
+            // red src range
+            LayerblendingRangeBuffer.putInt(0x0000ffff);
+            // red dst range
+            LayerblendingRangeBuffer.putInt(0x0000ffff);
+            // green src range
+            LayerblendingRangeBuffer.putInt(0x0000ffff);
+            // green dst range
+            LayerblendingRangeBuffer.putInt(0x0000ffff);
+            // blue src range
+            LayerblendingRangeBuffer.putInt(0x0000ffff);
+            // blue dst range
+            LayerblendingRangeBuffer.putInt(0x0000ffff);
+            // alpha src range
+            LayerblendingRangeBuffer.putInt(0x0000ffff);
+            // alpha dst range
+            LayerblendingRangeBuffer.putInt(0x0000ffff);
             byte[] LayerblendingRange = LayerblendingRangeBuffer.array();
 
             // Layer name: Pascal string, padded to a multiple of 4 bytes.
