@@ -199,12 +199,25 @@ public class LayerMaskWriter implements WriterFace {
             nameBytesBuffer.put(name.getBytes());
             byte[] nameBytes = nameBytesBuffer.array();
 
-            ExtraDataSize.putInt(Layermask.length + LayerblendingRange.length + nameBytes.length);
+            //unicodeName
+            String unicodeName = "测试";
+            char[] chars = unicodeName.toCharArray();
+            ByteBuffer additionalName = ByteBuffer.allocate(4 * 3 + chars.length * 2 + 4);
+            additionalName.put("8BIM".getBytes());
+            additionalName.put("luni".getBytes());
+            additionalName.putInt(chars.length * 2 + 4);
+            additionalName.putInt(chars.length);
+            for (char c : chars) {
+                additionalName.putShort((short) c);
+            }
+            byte[] additionalNameBytes = additionalName.array();
 
+            ExtraDataSize.putInt(Layermask.length + LayerblendingRange.length + nameBytes.length + additionalNameBytes.length);
             bytesList.add(ExtraDataSize.array());
             bytesList.add(Layermask);
             bytesList.add(LayerblendingRange);
             bytesList.add(nameBytes);
+            bytesList.add(additionalNameBytes);
         }
 
 
