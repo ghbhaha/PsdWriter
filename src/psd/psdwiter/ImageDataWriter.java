@@ -31,13 +31,22 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ImageDataWriter implements WriterFace {
+
+
+    private String prevImgPath;
+
+    public ImageDataWriter(String prevImgPath) {
+        this.prevImgPath = prevImgPath;
+    }
+
+
     @Override
     public byte[] toByte() {
         int allSize = 0;
         List<byte[]> bytesList = new ArrayList<>();
         BufferedImage bimg = null;
         try {
-            bimg = ImageIO.read(new File("/Users/guhaibo/Desktop/psd/Screenshot_20180106-175537.jpg"));
+            bimg = ImageIO.read(prevImgPath);
         } catch (IOException e) {
             // e.printStackTrace();
         }

@@ -37,13 +37,11 @@ public class PsdWriter {
         ColorModeWriter colorModeWriter = new ColorModeWriter();
         ImageResWriter imageResWriter = new ImageResWriter();
         LayerMaskWriter layerMaskWriter = new LayerMaskWriter();
-        layerMaskWriter.layers.add(new psd.psdwiter.bean.Layer("/Users/guhaibo/Desktop/psd/layer0.png"));
-        layerMaskWriter.layers.add(new psd.psdwiter.bean.Layer("/Users/guhaibo/Desktop/psd/layer1.png"));
-        layerMaskWriter.layers.add(new psd.psdwiter.bean.Layer("/Users/guhaibo/Desktop/psd/layer2.png"));
-        // layerMaskWriter.layers.add(new psdreader.psdwiter.bean.Layer("/Users/guhaibo/Desktop/psdreader/layer3.png"));
-
-        ImageDataWriter imageDataWriter = new ImageDataWriter();
-
+        layerMaskWriter.layers.add(new psd.psdwiter.bean.Layer("test/1.png"));
+        layerMaskWriter.layers.add(new psd.psdwiter.bean.Layer("test/2.png"));
+        layerMaskWriter.layers.add(new psd.psdwiter.bean.Layer("test/3.png"));
+        layerMaskWriter.layers.add(new psd.psdwiter.bean.Layer("test/4.png"));
+        ImageDataWriter imageDataWriter = new ImageDataWriter("test/preview.png");
 
         FileOutputStream fileOutputStream = null;
         BufferedOutputStream bufferedOutputStream = null;
